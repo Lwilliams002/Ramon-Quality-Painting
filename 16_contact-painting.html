@@ -32,6 +32,14 @@
 
 	<!-- custom style -->
 	<link rel="stylesheet" href="revolution/css/custom-painting.css" type="text/css">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+      // Initialize EmailJS with your user ID
+      emailjs.init('o2kasXhae1kb4-Qdv');
+    </script>
     <style>
         /* Mobile-only top margin */
         @media (max-width: 991.98px) {
@@ -157,7 +165,7 @@
                                     </div>
 
                                     <div class="col-md-12">
-                                        <div class="g-recaptcha" data-sitekey="copy-your-site-key-here"></div>
+                                        <div class="g-recaptcha" data-sitekey="6Ld-oygrAAAAAGOdLSUgPpTlZ43pUkHP__mcabWo"></div>
                                         <p id='submit' class="mt20">
                                             <input type='submit' id='send_message' value='Submit Form' class="btn-custom text-white">
                                         </p>
@@ -279,6 +287,23 @@
     });
     </script>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contact_form');
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          emailjs.sendForm('service_gyuwhda', 'template_upy29dc', this)
+            .then(function() {
+              document.getElementById('success_message').style.display = 'block';
+              document.getElementById('error_message').style.display = 'none';
+              form.reset();
+            }, function(error) {
+              console.error('EmailJS error:', error);
+              document.getElementById('error_message').style.display = 'block';
+            });
+        });
+      });
+    </script>
 </body>
 
 </html>
