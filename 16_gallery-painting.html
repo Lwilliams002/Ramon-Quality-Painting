@@ -133,10 +133,7 @@
             <!-- section close -->
 
             <section id="section-features" class="vertical-center text-light" aria-label="section">
-                <div id="picker-container">
-                    <label for="wallColorPicker">Choose wall color: </label>
-                    <input type="color" id="wallColorPicker" value="#695c4e">
-                </div>
+
                 <svg id="house-svg" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 527">
                     <defs>
                         <style>
@@ -10452,15 +10449,70 @@
                     </g>
                 </svg>
 
+                <!-- Color Customizer Controls -->
+                <div id="color-controls" class="btn-group my-3" role="group">
+                  <button type="button" class="btn btn-secondary" data-section="wall">Wall</button>
+                  <button type="button" class="btn btn-secondary" data-section="roof">Roof</button>
+                  <button type="button" class="btn btn-secondary" data-section="garage">Garage</button>
+                  <button type="button" class="btn btn-secondary" data-section="tile">Tile</button>
+                </div>
+                <div id="color-pickers" class="mb-5">
+                  <div id="picker-wall" class="picker-group">
+                    <button type="button" class="color-btn" data-color="#ffffff">White</button>
+                    <button type="button" class="color-btn" data-color="#cccccc">Light Gray</button>
+                    <button type="button" class="color-btn" data-color="#888888">Gray</button>
+                  </div>
+                  <div id="picker-roof" class="picker-group visually-hidden">
+                    <button type="button" class="color-btn" data-color="#ff0000">Red</button>
+                    <button type="button" class="color-btn" data-color="#800000">Maroon</button>
+                    <button type="button" class="color-btn" data-color="#ffa500">Orange</button>
+                  </div>
+                  <div id="picker-garage" class="picker-group visually-hidden">
+                    <button type="button" class="color-btn" data-color="#dddddd">Light Silver</button>
+                    <button type="button" class="color-btn" data-color="#aaaaaa">Silver</button>
+                    <button type="button" class="color-btn" data-color="#555555">Dark Gray</button>
+                  </div>
+                  <div id="picker-tile" class="picker-group visually-hidden">
+                    <button type="button" class="color-btn" data-color="#deb887">BurlyWood</button>
+                    <button type="button" class="color-btn" data-color="#d2b48c">Tan</button>
+                    <button type="button" class="color-btn" data-color="#8b4513">SaddleBrown</button>
+                  </div>
+                </div>
 
             </section>
 
             <script>
-                const picker = document.getElementById('wallColorPicker');
-                picker.addEventListener('input', e => {
-                    document.querySelectorAll('#_wall_ *')
-                        .forEach(el => el.style.fill = e.target.value);
-                });
+              let currentSection = 'wall';
+
+              // section button click handler
+              document.getElementById('color-controls').addEventListener('click', e => {
+                if (!e.target.matches('.btn')) return;
+                // toggle active styling
+                document.querySelectorAll('#color-controls .btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+
+                // show corresponding picker
+                currentSection = e.target.dataset.section;
+                document.querySelectorAll('.picker-group').forEach(pg => pg.classList.add('visually-hidden'));
+                document.getElementById('picker-' + currentSection).classList.remove('visually-hidden');
+              });
+
+              // color button click handler
+              document.getElementById('color-pickers').addEventListener('click', e => {
+                if (!e.target.matches('.color-btn')) return;
+                const color = e.target.dataset.color;
+                const targetId = {
+                  wall: '_wall_',
+                  roof: '_roof_',
+                  garage: '_window_',
+                  tile: '_tile_'
+                }[currentSection];
+                document.querySelectorAll('#' + targetId + ' *')
+                  .forEach(el => el.style.fill = color);
+              });
+
+              // initialize default active section
+              document.querySelector('#color-controls .btn[data-section="wall"]').classList.add('active');
             </script>
 
             <section id="section-gallery-carousel" aria-label="section">
