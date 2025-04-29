@@ -32,14 +32,20 @@
 
 	<!-- custom style -->
 	<link rel="stylesheet" href="revolution/css/custom-painting.css" type="text/css">
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <script>
-      // Initialize EmailJS with your user ID
-      emailjs.init('o2kasXhae1kb4-Qdv');
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+                publicKey: "kCnU9cJluhd_g1yap",
+            });
+        })();
     </script>
+    <script src="script.js"></script>
+
     <style>
         /* Mobile-only top margin */
         @media (max-width: 991.98px) {
@@ -47,6 +53,25 @@
                 margin-top: 30px !important;
             }
         }
+    </style>
+    <style>
+      /* Ensure <button> uses the same styling as input.btn-custom and a.btn-custom */
+      button.btn-custom,
+      input.btn-custom,
+      a.btn-custom {
+        font-size: 13px;
+        color: rgb(34, 34, 34);
+        letter-spacing: 3px;
+        line-height: normal;
+        text-transform: uppercase;
+        display: inline-block;
+        text-decoration: none;
+        padding: 7px 25px;
+        background: rgb(255, 255, 255);
+        border: none !important;
+        outline: none !important;
+        cursor: pointer;
+      }
     </style>
 </head>
 
@@ -144,43 +169,35 @@
                                     <div class="col-md-6">
                                         <div id='name_error' class='error'>Please enter your name.</div>
                                         <div>
-                                            <input type='text' name='Name' id='name' class="form-control" placeholder="Your Name" required>
+                                            <input id="name" type='text' name='from_name' class="form-control" placeholder="Your Name" required>
                                         </div>
 
                                         <div id='email_error' class='error'>Please enter your valid E-mail ID.</div>
                                         <div>
-                                            <input type='email' name='Email' id='email' class="form-control" placeholder="Your Email" required>
+                                            <input id="email" type='email' name='reply_to' class="form-control" placeholder="Your Email" required>
                                         </div>
 
-                                        <div id='phone_error' class='error'>Please enter your phone number.</div>
                                         <div>
-                                            <input type='text' name='phone' id='phone' class="form-control" placeholder="Your Phone" required>
+                                            <input id="subject" type='text' name='subject' class="form-control" placeholder="Subject">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div id='message_error' class='error'>Please enter your message.</div>
                                         <div>
-                                            <textarea name='message' id='message' class="form-control" placeholder="Your Message" required></textarea>
+                                            <textarea id="message" name='message' class="form-control" placeholder="Your Message" required></textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <div class="g-recaptcha" data-sitekey="6Ld-oygrAAAAAGOdLSUgPpTlZ43pUkHP__mcabWo"></div>
                                         <p id='submit' class="mt20">
-                                            <input type='submit' id='send_message' value='Submit Form' class="btn-custom text-white">
+                                            <button type="button" onclick="sendMail()" class="btn-custom text-white" style="background-color: #af9d5e" >Submit Form</button>
                                         </p>
                                     </div>
                                 </div>
                             </form>
 
-                            <div id="success_message" class='success'>
-                                Your message has been sent successfully. Refresh this page if you want to send more messages.
-                            </div>
-                            <div id="error_message" class='error'>
-                            	Sorry there was an error sending your form.
-                            </div>
-
                         </div>
+                        <script type="text/javascript" src="script.js"></script>
 
                         <div id="sidebar" class="col-md-4">
 
@@ -202,6 +219,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
@@ -273,8 +291,6 @@
     <script src="js/jquery.plugin.js"></script>
     <script src="js/jquery.event.move.js"></script>
     <script src="js/jquery.twentytwenty.js"></script>
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-    <script src="form.js"></script>
 
     <!-- SLIDER REVOLUTION SCRIPTS  -->
     <script src="rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
@@ -285,24 +301,6 @@
       $(".twentytwenty-container[data-orientation!='vertical']").twentytwenty({default_offset_pct: 0.5});
       $(".twentytwenty-container[data-orientation='vertical']").twentytwenty({default_offset_pct: 0.5, orientation: 'vertical'});
     });
-    </script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('contact_form');
-        form.addEventListener('submit', function(event) {
-          event.preventDefault();
-          emailjs.sendForm('service_gyuwhda', 'template_upy29dc', this)
-            .then(function() {
-              document.getElementById('success_message').style.display = 'block';
-              document.getElementById('error_message').style.display = 'none';
-              form.reset();
-            }, function(error) {
-              console.error('EmailJS error:', error);
-              document.getElementById('error_message').style.display = 'block';
-            });
-        });
-      });
     </script>
 </body>
 
