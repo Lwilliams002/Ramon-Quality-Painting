@@ -30,13 +30,13 @@
 
     <!-- color scheme -->
 	<link rel="stylesheet" href="css/colors/red.css" type="text/css" id="colors">
-        
+
     <!-- RS5.0 Stylesheet -->
     <link rel="stylesheet" href="revolution/css/settings.css" type="text/css">
     <link rel="stylesheet" href="revolution/css/layers.css" type="text/css">
     <link rel="stylesheet" href="revolution/css/navigation.css" type="text/css">
     <link rel="stylesheet" href="css/rev-settings.css" type="text/css">
-	
+
 	<!-- custom style -->
 	<link rel="stylesheet" href="revolution/css/custom-painting.css" type="text/css">
     <style>
@@ -92,6 +92,42 @@
             outline: none !important;
             cursor: pointer;
         }
+    </style>
+    <style>
+    /* Simple Slider Styles */
+    #feedback-slider {
+      position: relative;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    #feedback-slider .slides { display: flex; transition: transform 0.5s ease-in-out; }
+    #feedback-slider .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 60px 100px;
+      position: relative;
+    }
+    #feedback-slider .slide img { width: 85px; height: 85px; border-radius: 50%; display: block; margin: 0 auto 15px; }
+    #feedback-slider .slide h3 { text-align: center; margin: 15px 0; font-size: 20px; }
+    #feedback-slider .slide p { text-align: center; line-height: 1.6; margin-bottom: 15px; }
+    #feedback-slider .slide .rating { display: block; width: 47px; height: 47px; line-height: 44px; border: 3px solid #fff; background:#eee; border-radius:50%; text-align:center; position: absolute; top: 20px; right: 20px; font-weight:700; }
+    #feedback-slider .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      color: #AF9D5E;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+    #feedback-slider .prev { left:5px; }
+    #feedback-slider .next { right:5px; }
+    #feedback-slider .dots { text-align:center; margin-top:15px; }
+    #feedback-slider .dot { display:inline-block; width:11px; height:11px; margin:0 5px; background:#fff; border:1px solid #AF9D5E; border-radius:50%; cursor:pointer; }
+    #feedback-slider .dot.active { background:#AF9D5E; }
     </style>
 </head>
 
@@ -278,9 +314,38 @@
                     	    </div>
                     	</div>
 
-
                     </div>
                 </div>
+            </section>
+
+            <section id="feedback-slider">
+              <div class="slides">
+                <div class="slide">
+                  <img src="//c2.staticflickr.com/8/7310/buddyicons/24846422@N06_r.jpg" alt="">
+                  <h3>Homeowner, Albuquerque</h3>
+                  <p>Gomez Quality Painting gave our home’s exterior a stunning new look. Their attention to detail and friendly team made the process stress-free!</p>
+                  <span class="rating">5 <i class="fa fa-star"></i></span>
+                </div>
+                <div class="slide">
+                  <img src="https://i.postimg.cc/ydBjdm20/michael-dam-m-EZ3-Po-FGs-k-unsplash-1.jpg" alt="">
+                  <h3>Business Owner, Santa Fe</h3>
+                  <p>Professional, punctual, and precise. They refreshed our office interior with high-quality finishes — clients can’t stop complimenting our space!</p>
+                  <span class="rating">4 <i class="fa fa-star"></i></span>
+                </div>
+                <div class="slide">
+                  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/451270/profile/profile-80.jpg" alt="">
+                  <h3>Property Manager, Rio Rancho</h3>
+                  <p>We trust Gomez Quality Painting for every rental property. Their team delivers flawless results on time and within budget, every single time.</p>
+                  <span class="rating">5 <i class="fa fa-star"></i></span>
+                </div>
+              </div>
+              <button class="arrow prev">&#10094;</button>
+              <button class="arrow next">&#10095;</button>
+              <div class="dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
             </section>
 
 
@@ -407,7 +472,48 @@
     });
   </script>
 
-  <!-- Ensure script.js is loaded after the popup/modal script -->
+</body>
+
+<script>
+(function() {
+  const slider = document.getElementById('feedback-slider');
+  const slides = slider.querySelector('.slides');
+  const slideCount = slides.children.length;
+  let index = 0;
+  const prevBtn = slider.querySelector('.prev');
+  const nextBtn = slider.querySelector('.next');
+  const dots = slider.querySelectorAll('.dot');
+
+  function update() {
+    slides.style.transform = 'translateX(' + (-100 * index) + '%)';
+    dots.forEach((d,i) => d.classList.toggle('active', i === index));
+  }
+
+  prevBtn.addEventListener('click', () => {
+    index = (index - 1 + slideCount) % slideCount;
+    update();
+  });
+  nextBtn.addEventListener('click', () => {
+    index = (index + 1) % slideCount;
+    update();
+  });
+  dots.forEach((d,i) => {
+    d.addEventListener('click', () => {
+      index = i;
+      update();
+    });
+  });
+
+  // Initialize
+  update();
+
+  // Auto-play: advance slide every 3 seconds
+  setInterval(() => {
+    index = (index + 1) % slideCount;
+    update();
+  }, 3000);
+})();
+</script>
 </body>
 
 </html>
