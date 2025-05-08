@@ -7,7 +7,7 @@ function sendMail(){
         message:   document.querySelector("#message").value,
     };
 
-    emailjs.send('service_gyuwhda', 'template_upy29dc', parms)
+    emailjs.send('service_txrdsd4', 'template_qlgwp1c', parms)
       .then(() => {
         alert("Email has been sent!!");
         window.location.reload();
