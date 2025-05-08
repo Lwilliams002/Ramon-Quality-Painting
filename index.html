@@ -448,7 +448,7 @@
     <div class="modal-content">
       <span class="close-quote">&times;</span>
       <h3>Request a Free Quote</h3>
-      <form id="quote_form" onsubmit="sendMail(); return false;">
+      <form id="quote_form" method= "post" onsubmit="sendMail();  return false;">
         <input type="hidden" name="to_email" value="gomezqpainting@gmail.com">
         <div class="mb-3">
           <input type="text" name="from_name" id="quote_name" class="form-control" placeholder="Your Name" required>
