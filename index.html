@@ -448,21 +448,21 @@
     <div class="modal-content">
       <span class="close-quote">&times;</span>
       <h3>Request a Free Quote</h3>
-      <form id="quote_form" method= "post" onsubmit="sendMail();  return false;">
+      <form id="quote_form" onsubmit="sendMail(); return false;">
 
         <div class="mb-3">
-          <input type="text" name="from_name" id="quote_name" class="form-control" placeholder="Your Name" required>
+          <input type="text" name="from_name" id="name" class="form-control" placeholder="Your Name" required>
         </div>
         <div class="mb-3">
-          <input type="email" name="reply_to" id="quote_email" class="form-control" placeholder="Your Email" required>
+          <input type="email" name="reply_to" id="email" class="form-control" placeholder="Your Email" required>
         </div>
         <div class="mb-3">
-          <input type="text" name="subject" id="quote_subject" class="form-control" placeholder="Subject">
+          <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject">
         </div>
         <div class="mb-3">
-          <textarea name="message" id="quote_message" class="form-control" placeholder="Your Message" required></textarea>
+          <textarea name="message" id="message" class="form-control" placeholder="Your Message" required></textarea>
         </div>
-        <button type="submit" onclick= "sendMail()" class="btn-custom text-light d-block mx-auto" style="background-color: #af9d5e;">Submit Form</button>
+        <button type="submit" class="btn-custom text-light d-block mx-auto" style="background-color: #af9d5e;">Submit Form</button>
       </form>
     </div>
   </div>
