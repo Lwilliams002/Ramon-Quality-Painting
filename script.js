@@ -7,7 +7,7 @@ function sendMail(){
     };
 
     emailjs
-        .send('service_gyuwhda', 'template_upy29dc', parms)
+        .send('service_txrdsd4', 'template_qlgwp1c', parms)
         .then(()=>{
             alert("Email has been sent!!");
     })

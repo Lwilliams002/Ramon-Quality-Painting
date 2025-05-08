@@ -47,6 +47,20 @@
             }
         }
     </style>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+                publicKey: "SKJtT_k0e11VuH1fm",
+            });
+        })();
+    </script>
+    <script src="script.js"></script>
+
+
     <style>
       /* Free Quote Modal Styles */
       #quoteModal {
@@ -448,7 +462,7 @@
         <div class="mb-3">
           <textarea name="message" id="quote_message" class="form-control" placeholder="Your Message" required></textarea>
         </div>
-        <button type="submit" class="btn-custom text-light d-block mx-auto" style="background-color: #af9d5e;">Submit Form</button>
+        <button type="submit" onclick= "sendMail()" class="btn-custom text-light d-block mx-auto" style="background-color: #af9d5e;">Submit Form</button>
       </form>
     </div>
   </div>
